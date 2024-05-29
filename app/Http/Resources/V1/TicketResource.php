@@ -21,10 +21,11 @@ class TicketResource extends JsonResource
             'attributes' => [
                 'title' => $this->title,
                 'description' => $this->when(
-                    $request->routeIs('tickets.show'),
+                    !$request->routeIs(['tickets.index', 'author.tickets.index']),
                     $this->description
                 ),
-                'status' => $this->status
+                'status' => $this->status,
+                'createdAt' => $this->created_at
             ],
             'relationships' => [
                 'author' => [
@@ -33,15 +34,15 @@ class TicketResource extends JsonResource
                         'id' => $this->user_id
                     ],
                     'links' => [
-                        ['self' => 'todo']
+                        'self' => route('authors.show', ['author' => $this->user_id])
                     ]
                 ]
             ],
-            'includes' => new UserResource($this->whenLoaded('user')),
+            'includes' => new UserResource($this->whenLoaded('author')),
             'links' => [
-                [
+                
                     'self' => route('tickets.show', ['ticket' => $this->id ])
-                ]
+                
             ],
 
         ];
