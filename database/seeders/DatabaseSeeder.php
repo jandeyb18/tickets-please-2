@@ -20,5 +20,11 @@ class DatabaseSeeder extends Seeder
         ->recycle($user)
         ->create();
 
+        User::create([
+            'email' => 'manager@mail.com',
+            'password' => 'password',
+            'name' => 'Janjan',
+            'is_manager' => true
+        ]);
     }
 }

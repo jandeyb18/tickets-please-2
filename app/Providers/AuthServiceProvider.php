@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Ticket;
-use App\V1\Policies\TicketPolicy;
+use App\Policies\V1\TicketPolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,15 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
 
-    //  protected $policies = [
-    //     Ticket::class => TicketPolicy::class,
-    //     Ticket::class, => Ticket
-    //  ];
-
-    public function register(): void
-    {
-        //
-    }
+     protected $policies = [
+        Ticket::class => TicketPolicy::class,
+     ];
 
     /**
      * Bootstrap services.
